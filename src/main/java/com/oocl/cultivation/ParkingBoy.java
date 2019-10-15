@@ -3,15 +3,19 @@ package com.oocl.cultivation;
 import java.util.List;
 import java.util.Objects;
 
+import static com.oocl.cultivation.Messages.NOT_ENOUGH_POSITION;
+
 public class ParkingBoy {
 
+
     private final List<ParkingLot> parkingLotList;
+
+    private String message;
 
     public void setMessage(String message) {
         this.message = message;
     }
-
-    private String message;
+    
 
     public ParkingBoy(List<ParkingLot> parkingLotList) {
         this.parkingLotList = parkingLotList;
@@ -32,7 +36,8 @@ public class ParkingBoy {
             currentParkingLot.park(car, parkingTicket);
             return parkingTicket;
         }
-        message = "Not enough position.";
+        message = Messages.NOT_ENOUGH_POSITION;
+
         return null;
     }
 
@@ -46,10 +51,10 @@ public class ParkingBoy {
             if (Objects.nonNull(currentParkingLot)) {
                 return currentParkingLot.fetch(ticket);
             }
-            message = "Please provide your parking ticket.";
+            message = Messages.PROVIDE_PARKING_TICKET;
             return null;
         }
-        message = "Unrecognized parking ticket.";
+        message = Messages.UNRECOGNIZED_PARKING_TICKET;
         return null;
     }
 

@@ -16,7 +16,7 @@ public class SmartParkingBoy extends ParkingBoy {
             currentParkingLot.park(car, parkingTicket);
             return parkingTicket;
         }
-        this.setMessage("Not enough position.");
+        this.setMessage(Messages.NOT_ENOUGH_POSITION);
         return null;
     }
 
