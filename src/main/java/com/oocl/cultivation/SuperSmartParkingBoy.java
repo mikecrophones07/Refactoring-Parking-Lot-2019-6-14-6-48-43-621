@@ -9,6 +9,8 @@ public class SuperSmartParkingBoy extends SmartParkingBoy {
         super(parkingBoy);
     }
 
+    private List<ParkingLot> parkingLotList = getParkingLots();
+
     @Override
     public ParkingTicket park(Car car) {
         ParkingLot currentParkingLot = getLargerParkingLot();
@@ -23,14 +25,17 @@ public class SuperSmartParkingBoy extends SmartParkingBoy {
 
     @Override
     public ParkingLot getLargerParkingLot() {
-        return this.getParkingLots().stream().reduce(null, (initial, curr) -> {
-            if(curr.getAvailableParkingPosition() != 0) {
-                if (Objects.nonNull(initial) && Math.abs(Double.valueOf(initial.getAvailableParkingPosition())/10) >=Math.abs(Double.valueOf(curr.getAvailableParkingPosition())/10)) {
-                    return initial;
-                }
-                return curr;
+        return parkingLotList.stream().reduce(null, this::getMoreAvailableParkingLot);
+    }
+
+    @Override
+    public ParkingLot getMoreAvailableParkingLot(ParkingLot parkingLot1, ParkingLot parkingLot2) {
+        if(parkingLot2.getAvailableParkingPosition() != 0) {
+            if (Objects.nonNull(parkingLot1) && Math.abs(parkingLot1.getAvailableParkingPosition())/10 >= Math.abs(parkingLot2.getAvailableParkingPosition())/10) {
+                return parkingLot1;
             }
-            return null;
-        });
+            return parkingLot2;
+        }
+        return null;
     }
 }

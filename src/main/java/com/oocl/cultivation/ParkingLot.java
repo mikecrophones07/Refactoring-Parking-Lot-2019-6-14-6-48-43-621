@@ -5,18 +5,18 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ParkingLot {
-    private final int capacity;
+    private final Integer capacity;
     private Map<ParkingTicket, Car> cars = new HashMap<>();
 
     public ParkingLot() {
         this(10);
     }
 
-    public ParkingLot(int capacity) {
+    public ParkingLot(Integer capacity) {
         this.capacity = capacity;
     }
 
-    public int getAvailableParkingPosition() {
+    public Integer getAvailableParkingPosition() {
         return cars.size() - capacity;
     }
 
